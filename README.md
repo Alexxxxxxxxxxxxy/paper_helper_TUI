@@ -1,4 +1,4 @@
-<img width="2511" height="1374" alt="32d424c9-0e62-4b4d-a6c2-122659987f98" src="https://github.com/user-attachments/assets/6b92e9e1-e64b-42ed-bb36-6b467b374dcf" /># 📚 Paper Helper Agent - 毕业论文智能辅助助手
+# 📚 Paper Helper Agent - 毕业论文智能辅助助手
 
 > 基于大语言模型的全流程毕业论文自动化写作系统，让学术写作更高效、更轻松。
 
@@ -57,10 +57,10 @@ flowchart TD
 ## 🖼️ 产品截图
 
 ### 网页端主界面
-[](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_1.png)
+![](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_1.png)
 
 ### 一键论文生成助手
-[](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_2.png)
+![](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_2.png)
 
 ## 🖥️ Paper Helper TUI
 
