@@ -57,10 +57,10 @@ flowchart TD
 ## 🖼️ 产品截图
 
 ### 网页端主界面
-![](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_1.png)
+![网页端主界面](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_1.png)
 
 ### 一键论文生成助手
-![](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_2.png)
+![一键论文生成助手](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_2.png)
 
 ## 🖥️ Paper Helper TUI
 
