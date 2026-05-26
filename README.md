@@ -57,16 +57,10 @@ flowchart TD
 ## 🖼️ 产品截图
 
 ### 网页端主界面
-
-<div align="center">
-<img src="https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_1.png" alt="Paper Helper 网页端主界面" width="800">
-</div>
+[](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_1.png)
 
 ### 一键论文生成助手
-
-<div align="center">
-<img src="https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_2.png" alt="Paper Helper 一键论文生成" width="800">
-</div>
+[](https://github.com/Alexxxxxxxxxxxxy/paper_helper/helper_2.png)
 
 ## 🖥️ Paper Helper TUI
 
