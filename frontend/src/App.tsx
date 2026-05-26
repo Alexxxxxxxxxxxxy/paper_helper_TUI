@@ -1,7 +1,83 @@
 import './index.css'
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 type Page = 'assistant' | 'generate'
+
+const LOADING_TIMEOUT = 15000 // 15秒超时
+
+const LoadingSpinner = () => (
+  <div className="loading-container">
+    <div className="loading-spinner" />
+    <p className="loading-text">正在加载，请稍候...</p>
+  </div>
+)
+
+const LoadingTimeout = ({ onRetry }: { onRetry: () => void }) => (
+  <div className="loading-container">
+    <div className="loading-error-icon">!</div>
+    <p className="loading-text">加载较慢，请检查网络或点击重试</p>
+    <button className="retry-button" onClick={onRetry}>重试</button>
+  </div>
+)
+
+const ChatbotIframe = ({ src }: { src: string }) => {
+  const [isLoading, setIsLoading] = useState(true)
+  const [isTimeout, setIsTimeout] = useState(false)
+  const [iframeKey, setIframeKey] = useState(0)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const handleLoad = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+      timerRef.current = null
+    }
+    setIsLoading(false)
+    setIsTimeout(false)
+  }, [])
+
+  const handleRetry = useCallback(() => {
+    setIsLoading(true)
+    setIsTimeout(false)
+    setIframeKey(prev => prev + 1)
+    timerRef.current = setTimeout(() => {
+      setIsTimeout(true)
+    }, LOADING_TIMEOUT)
+  }, [])
+
+  useEffect(() => {
+    setIsLoading(true)
+    setIsTimeout(false)
+    timerRef.current = setTimeout(() => {
+      setIsTimeout(true)
+    }, LOADING_TIMEOUT)
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+    }
+  }, [src, iframeKey])
+
+  return (
+    <div className="iframe-wrapper">
+      {isLoading && !isTimeout && <LoadingSpinner />}
+      {isTimeout && <LoadingTimeout onRetry={handleRetry} />}
+      <iframe
+        key={iframeKey}
+        src={src}
+        style={{
+          width: '100%',
+          height: '100%',
+          minHeight: '700px',
+          opacity: isLoading ? 0 : 1,
+          transition: 'opacity 0.3s ease'
+        }}
+        frameBorder="0"
+        allow="microphone"
+        onLoad={handleLoad}
+      />
+    </div>
+  )
+}
 
 const Header = ({ activePage, onNavigate }: { activePage: Page; onNavigate: (page: Page) => void }) => {
   return (
@@ -41,12 +117,7 @@ const Header = ({ activePage, onNavigate }: { activePage: Page; onNavigate: (pag
 const AssistantPage = () => {
   return (
     <div className="assistant-page">
-      <iframe
-        src="https://udify.app/chatbot/0esZFDM312zviBJL"
-        style={{ width: '100%', height: '100%', minHeight: '700px' }}
-        frameBorder="0"
-        allow="microphone"
-      />
+      <ChatbotIframe src="https://udify.app/chatbot/0esZFDM312zviBJL" />
     </div>
   )
 }
@@ -54,12 +125,7 @@ const AssistantPage = () => {
 const GeneratePage = () => {
   return (
     <div className="generate-page">
-      <iframe
-        src="https://udify.app/chatbot/oXvfxQdSGsKTexdv"
-        style={{ width: '100%', height: '100%', minHeight: '700px' }}
-        frameBorder="0"
-        allow="microphone"
-      />
+      <ChatbotIframe src="https://udify.app/chatbot/oXvfxQdSGsKTexdv" />
     </div>
   )
 }
